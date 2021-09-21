@@ -90,6 +90,7 @@ SIM800L::SIM800L(Stream* _stream, uint8_t _pinRst, uint16_t _internalBufferSize,
   if(pinReset != RESET_PIN_NOT_USED) {
     // Setup the reset pin and force a reset of the module
     pinMode(pinReset, OUTPUT);
+    digitalWrite(pinReset, LOW);
     reset();
   }
 
@@ -390,8 +391,6 @@ void SIM800L::reset() {
     delay(500);
     digitalWrite(pinReset, LOW);
     delay(500);
-    digitalWrite(pinReset, HIGH);
-    delay(1000);
   } else {
     // Some logging
     if(enableDebug) debugStream->println(F("SIM800L : Reset requested but reset pin undefined"));
